@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                //关闭csrf
+                //关闭csrf,因为前后端项目，使用的不是cookie，CSRF基于cookie攻击，SpringSecurity会使用csrf_token，csrf_token和token的作用差不多，所以可以直接关闭
                 .csrf().disable()
                 //不通过Session获取SecurityContext
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -45,7 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // 对于登录接口 允许匿名访问
                 //.permitAll 登录不登录都可访问
-                .antMatchers("/hello").permitAll()
+//                .antMatchers("/hello").permitAll()
+//                .antMatchers("/hello").anonymous()
+                .antMatchers("/hello").hasAuthority("system:dept:list")
                 .antMatchers("/user/login").anonymous()
 //                .antMatchers("/testCors").hasAuthority("system:dept:list222")
                 // 除上面外的所有请求全部需要鉴权认证

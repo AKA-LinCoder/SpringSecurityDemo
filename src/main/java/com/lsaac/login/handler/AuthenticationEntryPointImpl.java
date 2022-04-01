@@ -17,12 +17,20 @@ import java.io.IOException;
 //认证失败处理器
 @Component
 public class AuthenticationEntryPointImpl  implements AuthenticationEntryPoint {
-    @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        ///未认证错误
-        ResponseResult result = new ResponseResult(HttpStatus.UNAUTHORIZED.value(),"当前用户认证失败，请重新登录");
-        String json = JSON.toJSONString(result);
-        //处理异常
-        WebUtils.renderString(response,json);
-    }
+//    @Override
+//    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+//        ///未认证错误
+//        ResponseResult result = new ResponseResult(HttpStatus.UNAUTHORIZED.value(),"当前用户认证失败，请重新登录");
+//        String json = JSON.toJSONString(result);
+//        //处理异常
+//        WebUtils.renderString(response,json);
+//    }
+@Override
+public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+    ///未认证错误
+    ResponseResult result = new ResponseResult(HttpStatus.UNAUTHORIZED.value(),"当前用户认证失败，请重新登录");
+    String json = JSON.toJSONString(result);
+    //处理异常
+    WebUtils.renderString(response,json);
+}
 }

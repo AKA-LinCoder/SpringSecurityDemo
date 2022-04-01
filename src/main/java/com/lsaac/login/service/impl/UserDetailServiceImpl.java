@@ -2,6 +2,7 @@ package com.lsaac.login.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.lsaac.login.domain.LoginUser;
+import com.lsaac.login.domain.ResponseResult;
 import com.lsaac.login.domain.User;
 import com.lsaac.login.mapper.MenuMapper;
 import com.lsaac.login.mapper.UserMapper;
@@ -33,6 +34,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         //如果没有查询到用户就抛出异常
         if(Objects.isNull(user)){
             throw  new RuntimeException("用户名不存在");
+//            return new ResponseResult(200,"找不到该用户");
         }
         //TODO 查询对应的权限信息
 
